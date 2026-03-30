@@ -8,7 +8,7 @@ The full application is implemented in `index.html` and runs offline with no ext
 
 1. Part 1 (CLO-1): Linear Programming - Simplex Method
 2. Part 2 (CLO-2): FFT / DFT Visualization
-3. Part 3 (CLO-3): Modular Exponentiation (Square-and-Multiply)
+3. Part 3 (CLO-3): Modular Exponentiation + RSA Cryptosystem Lab
 
 ## Current UI Structure
 
@@ -29,6 +29,7 @@ The full application is implemented in `index.html` and runs offline with no ext
 - Plain-language step explanation box
 - Scrollable history table with clickable rows (jump to step)
 - Color legend near visualization
+- Learning Objectives block in each part (placed below Key Insight)
 - Collapsible educational sections:
   - Algorithm overview
   - Key concepts
@@ -39,6 +40,7 @@ The full application is implemented in `index.html` and runs offline with no ext
 
 - Custom LP input: objective, constraints, bounds
 - Pivot rule selection (largest coefficient / Bland's rule)
+- Explicit problem-formulation section (input/output/objective/constraints/when to use and when not)
 - Preset cases:
   - Basic feasible LP
   - Unbounded
@@ -64,8 +66,11 @@ The full application is implemented in `index.html` and runs offline with no ext
   - Operation counts
   - Measured runtime
   - Numerical difference check
+- Explicit recurrence/complexity explanation: T(n) = 2T(n/2) + O(n)
+- Practical vs theoretical speedup discussion
+- Dedicated "Complexity & Application Depth (CLO-2)" learning section
 
-## Part 3 - Modular Exponentiation
+## Part 3 - Modular Exponentiation + RSA Lab
 
 - Custom inputs: base, exponent, modulus
 - Both variants:
@@ -78,6 +83,15 @@ The full application is implemented in `index.html` and runs offline with no ext
   - Modular multiplication count
   - Bit length
 - Preset examples including RSA-style example
+- RSA cryptosystem lab:
+  - Key generation from p, q, e (plus auto-key generation by bit size)
+  - Encryption c = m^e mod n
+  - Decryption m = c^d mod n
+  - RSA status panel and generated key table (n, phi, e, d)
+  - Correctness test suite across multiple messages
+  - Number-theoretic checks: gcd(e, phi)=1 and e*d mod phi = 1
+  - Security/efficiency notes and attack assumptions
+- Dedicated "Cryptosystem Development & Testing (CLO-3)" learning section
 
 ## Tech Constraints
 
@@ -109,5 +123,5 @@ The full application is implemented in `index.html` and runs offline with no ext
 1. Show homepage and explain three CLO parts.
 2. Part 1: run a normal LP, then quickly show unbounded/infeasible/degenerate presets.
 3. Part 2: demonstrate DFT matrix, FFT decomposition, and inverse reconstruction.
-4. Part 3: run both LTR and RTL variants, then show RSA preset.
+4. Part 3: run both LTR and RTL variants, then demonstrate RSA key generation, encrypt, decrypt, and test suite.
 5. Conclude with complexity gains and where each algorithm is used.

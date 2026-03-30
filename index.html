@@ -564,10 +564,6 @@
             display: flex;
         }
 
-        .hidden {
-            display: none !important;
-        }
-
         @media (max-width: 980px) {
             .container {
                 flex-direction: column;
@@ -598,11 +594,7 @@
             --text-muted: #a8b8ef;
             --accent: #61a0ff;
             --accent-2: #74d1ff;
-            --good: #70db9b;
-            --warn: #ffd166;
-            --danger: #ff7f7f;
             --shadow-soft: 0 10px 30px rgba(3, 8, 28, 0.45);
-            --shadow-strong: 0 18px 50px rgba(3, 8, 28, 0.62);
         }
 
         body {
@@ -2210,6 +2202,16 @@
                     <strong>Tableau:</strong> Matrix form showing coefficients and current values. Each column is a variable.
                 </div>
 
+                <button class="collapsible" onclick="toggleCollapsible(this)">🧩 Problem Formulation (CLO-1)</button>
+                <div class="collapsible-content">
+                    <strong>Engineering/Business Case:</strong> Production planning for two products x1 and x2.<br>
+                    <strong>Input:</strong> objective coefficients c, resource matrix A, capacity vector b.<br>
+                    <strong>Output:</strong> optimal production quantities x and optimal profit z.<br>
+                    <strong>Objective:</strong> maximize z = c^T x subject to Ax &le; b, x &ge; 0.<br>
+                    <strong>Why Simplex:</strong> LP model is linear with exact constraints, and optimality is required.<br>
+                    <strong>When not applicable:</strong> nonlinear objectives/constraints, integer-only decisions (need MILP/IP), uncertain data (need stochastic/robust variants).
+                </div>
+
                 <div class="pseudocode">
                     <div id="part1PseudoLine0" title="Function definition for Simplex method">SIMPLEX(c, A, b)</div>
                       <div id="part1PseudoLine1" title="Set up the initial tableau with objective c, constraint matrix A, and RHS vector b">  Initialize tableau from A, b, c</div>
@@ -2363,6 +2365,12 @@ until no entering variable exists (optimal)</div>
                     <div class="key-concept-title">Key Insight</div>
                     <div class="key-concept-text">The optimal solution to an LP always lies at a vertex. The Simplex method intelligently jumps from vertex to vertex, avoiding the exponential number of possibilities.</div>
                 </div>
+                <div class="control-section" id="part1LearningObjectives">
+                    <h3>Learning Objectives</h3>
+                    <div style="font-size: 14px; line-height: 1.6; color: #dbe6f5;">
+                        After this section, you will be able to: formulate an LP model from a real problem; execute Simplex pivots step by step; justify optimality and interpret edge cases (unbounded, infeasible, degenerate).
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2439,6 +2447,16 @@ until no entering variable exists (optimal)</div>
                     <strong>Butterfly:</strong> Basic operation combining two values with a twiddle factor.
                     <br><br>
                     <strong>Frequency Domain:</strong> Output shows magnitude and phase of frequency components.
+                </div>
+
+                <button class="collapsible" onclick="toggleCollapsible(this)">📈 Complexity & Application Depth (CLO-2)</button>
+                <div class="collapsible-content">
+                    <strong>Problem Identification:</strong> Spectrum analysis / polynomial multiplication where direct DFT is too slow.<br>
+                    <strong>Recurrence:</strong> T(n) = 2T(n/2) + O(n), so T(n) = O(n log n).<br>
+                    <strong>Naive Baseline:</strong> O(n^2) complex operations.<br>
+                    <strong>Why faster:</strong> Recursive reuse of even/odd subproblems and butterfly combining avoids repeated work.<br>
+                    <strong>When worth using:</strong> medium to large n, repeated transforms, or real-time signal tasks.<br>
+                    <strong>Practical caveats:</strong> constants, cache behavior, and small-n overhead can reduce theoretical speedup.
                 </div>
 
                 <div class="pseudocode">
@@ -2596,6 +2614,12 @@ until no entering variable exists (optimal)</div>
                     <div class="key-concept-title">Key Insight</div>
                     <div class="key-concept-text">FFT exploits the structure of the DFT matrix to reduce O(n²) multiplications to O(n log n). Every doubling of n only adds log n stages instead of doubling the work. This makes processing large signals practical.</div>
                 </div>
+                <div class="control-section" id="part2LearningObjectives">
+                    <h3>Learning Objectives</h3>
+                    <div style="font-size: 14px; line-height: 1.6; color: #dbe6f5;">
+                        After this section, you will be able to: explain DFT vs FFT purpose; trace Cooley-Tukey split and butterfly combine; derive why FFT is O(n log n) and compare it to naive O(n^2).
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2668,6 +2692,61 @@ until no entering variable exists (optimal)</div>
                     </div>
                 </div>
 
+                <div class="control-section">
+                    <h3>🔐 RSA Cryptosystem Lab (CLO-3)</h3>
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px;">Prime p:</label>
+                    <input class="input-field" type="number" id="part3InputP" value="61" min="3" max="997">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Prime q:</label>
+                    <input class="input-field" type="number" id="part3InputQ" value="53" min="3" max="997">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Public exponent e:</label>
+                    <input class="input-field" type="number" id="part3InputE" value="17" min="3" max="100000">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Message m (0 &le; m &lt; n):</label>
+                    <input class="input-field" type="number" id="part3InputMessage" value="65" min="0" max="1000000">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Auto key size (demo bits):</label>
+                    <select class="input-field" id="part3KeySize">
+                        <option value="8">8-bit demo</option>
+                        <option value="10">10-bit demo</option>
+                        <option value="12">12-bit demo</option>
+                    </select>
+
+                    <div class="button-group" style="margin-top: 8px;">
+                        <button class="btn" onclick="rsaLab.generateKeys()">Generate Keys</button>
+                        <button class="btn" onclick="rsaLab.generateKeysFromSize()">Auto Keys</button>
+                        <button class="btn" onclick="rsaLab.encryptMessage()">Encrypt</button>
+                        <button class="btn" onclick="rsaLab.decryptCipher()">Decrypt</button>
+                    </div>
+                    <div class="button-group full">
+                        <button class="btn success" onclick="rsaLab.runTestSuite()">Run Correctness + Security Tests</button>
+                    </div>
+
+                    <div class="explanation-box" style="margin-top: 8px;">
+                        <div class="explanation-title">RSA Status</div>
+                        <div id="part3RSAStatus">Generate keys to start the cryptosystem pipeline.</div>
+                    </div>
+                    <div class="history-table" style="margin-top: 8px; max-height: 180px;">
+                        <table>
+                            <thead>
+                                <tr><th>Item</th><th>Value</th></tr>
+                            </thead>
+                            <tbody id="part3RSAKeys">
+                                <tr><td colspan="2" style="color:#90caf9;">No key material yet</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="explanation-box" style="margin-top: 8px;">
+                        <div class="explanation-title">Ciphertext / Recovery</div>
+                        <div id="part3RSAResult">c = -, recovered m = -</div>
+                    </div>
+                    <div class="explanation-box" style="margin-top: 8px;">
+                        <div class="explanation-title">Security + Efficiency Notes</div>
+                        <div id="part3RSASecurity">After tests, this panel reports assumptions (factoring hardness), timing, and attack notes.</div>
+                    </div>
+                </div>
+
                 <button class="collapsible" onclick="toggleCollapsible(this)">📖 Algorithm Overview</button>
                 <div class="collapsible-content">
                     <strong>Modular Exponentiation (Square-and-Multiply)</strong> computes a^b mod n efficiently in O(log b) multiplications.
@@ -2688,6 +2767,14 @@ until no entering variable exists (optimal)</div>
                     <strong>Left-to-Right:</strong> Start from the highest bit.
                     <br><br>
                     <strong>Right-to-Left:</strong> Start from the lowest bit.
+                </div>
+
+                <button class="collapsible" onclick="toggleCollapsible(this)">🧩 Cryptosystem Development & Testing (CLO-3)</button>
+                <div class="collapsible-content">
+                    <strong>Pipeline:</strong> key generation (p, q, n, φ, e, d) → encryption c = m^e mod n → decryption m = c^d mod n.<br>
+                    <strong>Number Theory Used:</strong> modular arithmetic, gcd(e, φ) = 1, modular inverse d = e^(-1) mod φ, Euler theorem basis for correctness.<br>
+                    <strong>Correctness Check:</strong> verify decrypted message equals original message for multiple inputs.<br>
+                    <strong>Security Assumption:</strong> practical RSA security relies on hardness of factoring n = pq for large primes.
                 </div>
 
                 <div class="pseudocode">
@@ -2831,6 +2918,12 @@ for each bit in binary(b):
                     <div class="key-concept-title">Key Insight</div>
                     <div class="key-concept-text">Without this algorithm, RSA encryption would require 2^b multiplications (where b can be 2048+ bits!). Square-and-Multiply reduces this to just log b multiplications. This is why modern cryptography is practical.</div>
                 </div>
+                <div class="control-section" id="part3LearningObjectives">
+                    <h3>Learning Objectives</h3>
+                    <div style="font-size: 14px; line-height: 1.6; color: #dbe6f5;">
+                        After this section, you will be able to: compute modular powers efficiently with binary exponentiation; explain why the method is O(log b); build and test an RSA pipeline (key generation, encryption, decryption) with number-theoretic reasoning.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2846,6 +2939,19 @@ for each bit in binary(b):
                 const candidate = btn.parentElement.nextElementSibling;
                 if (candidate && candidate.classList.contains('collapsible-content')) {
                     content = candidate;
+                }
+            }
+
+            // If intermediate blocks exist (e.g., learning objectives),
+            // walk forward to find the next collapsible content panel.
+            if ((!content || !content.classList.contains('collapsible-content')) && btn.parentElement) {
+                let probe = btn.parentElement.nextElementSibling;
+                while (probe) {
+                    if (probe.classList && probe.classList.contains('collapsible-content')) {
+                        content = probe;
+                        break;
+                    }
+                    probe = probe.nextElementSibling;
                 }
             }
 
@@ -2908,6 +3014,17 @@ for each bit in binary(b):
                 document.body.classList.add('home-visible');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+
+            // Home should behave like pressing Reset in every part.
+            if (typeof simplex !== 'undefined' && simplex && typeof simplex.reset === 'function') {
+                simplex.reset();
+            }
+            if (typeof fft !== 'undefined' && fft && typeof fft.reset === 'function') {
+                fft.reset();
+            }
+            if (typeof modExp !== 'undefined' && modExp && typeof modExp.reset === 'function') {
+                modExp.reset();
+            }
         }
 
         function parseVector(text) {
@@ -2949,6 +3066,73 @@ for each bit in binary(b):
 
         function formatNum(value, decimals = 3) {
             return Number.isFinite(value) ? Number(value).toFixed(decimals) : '-';
+        }
+
+        function gcd(a, b) {
+            let x = Math.abs(Math.trunc(a));
+            let y = Math.abs(Math.trunc(b));
+            while (y !== 0) {
+                const t = y;
+                y = x % y;
+                x = t;
+            }
+            return x;
+        }
+
+        function egcd(a, b) {
+            if (b === 0) return {g: a, x: 1, y: 0};
+            const next = egcd(b, a % b);
+            return {g: next.g, x: next.y, y: next.x - Math.floor(a / b) * next.y};
+        }
+
+        function modInverse(a, m) {
+            const r = egcd(a, m);
+            if (Math.abs(r.g) !== 1) return null;
+            return ((r.x % m) + m) % m;
+        }
+
+        function modPow(base, exp, mod) {
+            let b = ((base % mod) + mod) % mod;
+            let e = Math.trunc(exp);
+            let result = 1 % mod;
+            while (e > 0) {
+                if ((e & 1) === 1) {
+                    result = (result * b) % mod;
+                }
+                b = (b * b) % mod;
+                e >>= 1;
+            }
+            return result;
+        }
+
+        function isPrime(n) {
+            const x = Math.trunc(n);
+            if (x < 2) return false;
+            if (x % 2 === 0) return x === 2;
+            for (let d = 3; d * d <= x; d += 2) {
+                if (x % d === 0) return false;
+            }
+            return true;
+        }
+
+        function randomOddInRange(min, max) {
+            let x = min + Math.floor(Math.random() * Math.max(1, max - min + 1));
+            if (x % 2 === 0) x++;
+            if (x > max) x -= 2;
+            return Math.max(min, Math.min(max, x));
+        }
+
+        function samplePrime(bitSize) {
+            const lower = Math.max(3, 1 << Math.max(2, bitSize - 1));
+            const upper = Math.max(lower + 10, (1 << bitSize) - 1);
+            for (let tries = 0; tries < 2000; tries++) {
+                const cand = randomOddInRange(lower, upper);
+                if (isPrime(cand)) return cand;
+            }
+            for (let v = lower | 1; v <= upper; v += 2) {
+                if (isPrime(v)) return v;
+            }
+            return null;
         }
 
         function updatePart1WorkedExample() {
@@ -4904,6 +5088,225 @@ for each bit in binary(b):
             modExp.buildSteps();
         }
 
+        const rsaLab = {
+            p: null,
+            q: null,
+            n: null,
+            phi: null,
+            e: null,
+            d: null,
+            lastMessage: null,
+            lastCipher: null,
+            lastRecovered: null,
+
+            setStatus(text) {
+                const el = document.getElementById('part3RSAStatus');
+                if (el) el.textContent = text;
+            },
+
+            setResult(text) {
+                const el = document.getElementById('part3RSAResult');
+                if (el) el.textContent = text;
+            },
+
+            setSecurity(text) {
+                const el = document.getElementById('part3RSASecurity');
+                if (el) el.innerHTML = text;
+            },
+
+            renderKeyTable() {
+                const tbody = document.getElementById('part3RSAKeys');
+                if (!tbody) return;
+                if (!Number.isInteger(this.n) || !Number.isInteger(this.d)) {
+                    tbody.innerHTML = '<tr><td colspan="2" style="color:#90caf9;">No key material yet</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = `
+                    <tr><td>p, q</td><td>${this.p}, ${this.q}</td></tr>
+                    <tr><td>n = p*q</td><td>${this.n}</td></tr>
+                    <tr><td>phi(n)</td><td>${this.phi}</td></tr>
+                    <tr><td>e (public)</td><td>${this.e}</td></tr>
+                    <tr><td>d (private)</td><td>${this.d}</td></tr>
+                    <tr><td>Check</td><td>(e*d) mod phi = ${(this.e * this.d) % this.phi}</td></tr>
+                    <tr><td>Public Key</td><td>(${this.e}, ${this.n})</td></tr>
+                    <tr><td>Private Key</td><td>(${this.d}, ${this.n})</td></tr>
+                `;
+            },
+
+            readInputs() {
+                const p = parseInt(document.getElementById('part3InputP')?.value || '', 10);
+                const q = parseInt(document.getElementById('part3InputQ')?.value || '', 10);
+                const e = parseInt(document.getElementById('part3InputE')?.value || '', 10);
+                return {p, q, e};
+            },
+
+            generateKeys() {
+                const {p, q, e} = this.readInputs();
+                if (!Number.isInteger(p) || !Number.isInteger(q) || !Number.isInteger(e)) {
+                    this.setStatus('Invalid key input. Provide integer p, q, e values.');
+                    return;
+                }
+                if (!isPrime(p) || !isPrime(q)) {
+                    this.setStatus('Key generation failed: p and q must both be prime.');
+                    return;
+                }
+                if (p === q) {
+                    this.setStatus('Key generation failed: p and q should be distinct primes.');
+                    return;
+                }
+
+                const n = p * q;
+                const phi = (p - 1) * (q - 1);
+                if (e <= 1 || e >= phi) {
+                    this.setStatus(`Key generation failed: e must satisfy 1 < e < phi(n) = ${phi}.`);
+                    return;
+                }
+                if (gcd(e, phi) !== 1) {
+                    this.setStatus(`Key generation failed: gcd(e, phi) = ${gcd(e, phi)}. Need gcd = 1.`);
+                    return;
+                }
+
+                const d = modInverse(e, phi);
+                if (d === null) {
+                    this.setStatus('Key generation failed: modular inverse d does not exist.');
+                    return;
+                }
+
+                this.p = p;
+                this.q = q;
+                this.n = n;
+                this.phi = phi;
+                this.e = e;
+                this.d = d;
+                this.renderKeyTable();
+                this.setStatus(`Keys generated. n=${n}, phi=${phi}, and d is computed from e^(-1) mod phi.`);
+                this.setSecurity(
+                    `<strong>Number-Theoretic Steps:</strong> n = p*q, phi = (p-1)(q-1), gcd(e,phi)=1, d = e^(-1) mod phi.<br>` +
+                    `<strong>Correctness Basis:</strong> Euler theorem / RSA congruence ensures m^(ed) ≡ m (mod n) for valid messages.<br>` +
+                    `<strong>Security Basis:</strong> Public key is safe only when factoring n is computationally hard at real key sizes.`
+                );
+            },
+
+            generateKeysFromSize() {
+                const bitSize = parseInt(document.getElementById('part3KeySize')?.value || '8', 10);
+                const halfBits = Math.max(4, Math.floor(bitSize / 2));
+                let p = samplePrime(halfBits);
+                let q = samplePrime(halfBits);
+                let guard = 0;
+                while (p !== null && q !== null && p === q && guard < 50) {
+                    q = samplePrime(halfBits);
+                    guard++;
+                }
+                if (p === null || q === null || p === q) {
+                    this.setStatus('Auto-key generation failed: could not find suitable distinct primes.');
+                    return;
+                }
+
+                const phi = (p - 1) * (q - 1);
+                let e = 65537;
+                if (e >= phi || gcd(e, phi) !== 1) {
+                    e = 17;
+                    while (e < phi && gcd(e, phi) !== 1) e += 2;
+                }
+                if (e >= phi) {
+                    this.setStatus('Auto-key generation failed: could not find valid public exponent e.');
+                    return;
+                }
+
+                const pEl = document.getElementById('part3InputP');
+                const qEl = document.getElementById('part3InputQ');
+                const eEl = document.getElementById('part3InputE');
+                if (pEl) pEl.value = String(p);
+                if (qEl) qEl.value = String(q);
+                if (eEl) eEl.value = String(e);
+                this.generateKeys();
+            },
+
+            encryptMessage() {
+                if (!Number.isInteger(this.n) || !Number.isInteger(this.e)) {
+                    this.setStatus('Encrypt failed: generate keys first.');
+                    return;
+                }
+                const m = parseInt(document.getElementById('part3InputMessage')?.value || '', 10);
+                if (!Number.isInteger(m) || m < 0 || m >= this.n) {
+                    this.setStatus(`Encrypt failed: message must satisfy 0 <= m < n (${this.n}).`);
+                    return;
+                }
+
+                const t0 = performance.now();
+                const c = modPow(m, this.e, this.n);
+                const t1 = performance.now();
+                this.lastMessage = m;
+                this.lastCipher = c;
+                this.setResult(`c = m^e mod n = ${m}^${this.e} mod ${this.n} = ${c}; recovered m = -`);
+                this.setStatus('Encryption complete. Use Decrypt to verify correctness.');
+                this.setSecurity(
+                    `<strong>Encryption Step:</strong> c = m^e mod n.<br>` +
+                    `<strong>Observed Time:</strong> ${Math.max(0, t1 - t0).toFixed(4)} ms (demo runtime).<br>` +
+                    `<strong>Interpretation:</strong> modular exponentiation scales with O(log e) multiplications.`
+                );
+            },
+
+            decryptCipher() {
+                if (!Number.isInteger(this.n) || !Number.isInteger(this.d)) {
+                    this.setStatus('Decrypt failed: generate keys first.');
+                    return;
+                }
+                let c = this.lastCipher;
+                if (!Number.isInteger(c)) {
+                    const m = parseInt(document.getElementById('part3InputMessage')?.value || '', 10);
+                    if (!Number.isInteger(m) || m < 0 || m >= this.n) {
+                        this.setStatus('Decrypt failed: no ciphertext available and message is invalid for fallback encryption.');
+                        return;
+                    }
+                    c = modPow(m, this.e, this.n);
+                    this.lastCipher = c;
+                    this.lastMessage = m;
+                }
+
+                const recovered = modPow(c, this.d, this.n);
+                this.lastRecovered = recovered;
+                const ok = Number.isInteger(this.lastMessage) ? recovered === this.lastMessage : true;
+                this.setResult(`c = ${c}; recovered m = c^d mod n = ${recovered}`);
+                this.setStatus(ok ? 'Decryption complete and correctness verified (recovered m equals original m).' : 'Decryption complete but recovered value does not match original message.');
+            },
+
+            runTestSuite() {
+                if (!Number.isInteger(this.n) || !Number.isInteger(this.d)) {
+                    this.setStatus('Run tests failed: generate keys first.');
+                    return;
+                }
+
+                const candidates = [0, 1, 2, 5, 42, 65, Math.max(0, this.n - 2), Math.max(0, this.n - 1)];
+                const tests = candidates
+                    .filter((m, idx, arr) => m >= 0 && m < this.n && arr.indexOf(m) === idx)
+                    .slice(0, 8);
+
+                const t0 = performance.now();
+                let passed = 0;
+                const rows = [];
+                for (const m of tests) {
+                    const c = modPow(m, this.e, this.n);
+                    const recovered = modPow(c, this.d, this.n);
+                    const ok = recovered === m;
+                    if (ok) passed++;
+                    rows.push(`m=${m} -> c=${c} -> m'=${recovered} ${ok ? 'OK' : 'FAIL'}`);
+                }
+                const t1 = performance.now();
+
+                const modulusBits = Math.max(1, Math.floor(Math.log2(this.n)) + 1);
+                const summary = `${passed}/${tests.length} correctness tests passed`;
+                this.setStatus(`Test suite complete: ${summary}.`);
+                this.setSecurity(
+                    `<strong>Correctness Tests:</strong><br>${rows.join('<br>')}<br><br>` +
+                    `<strong>Efficiency:</strong> Tested ${tests.length} messages in ${Math.max(0, t1 - t0).toFixed(4)} ms.<br>` +
+                    `<strong>Key Size Note:</strong> demo modulus size is ~${modulusBits} bits; secure real-world RSA uses far larger keys.<br>` +
+                    `<strong>Security Assumptions:</strong> resistance is based on factoring hardness; small demo keys are breakable and are for learning only.<br>` +
+                    `<strong>Attack Discussion:</strong> brute-force factoring on tiny n is feasible, so correctness here does not imply practical security.`
+                );
+            }
+        };
+
         document.getElementById('part1Speed')?.addEventListener('input', function () {
             document.getElementById('part1SpeedValue').textContent = this.value + 'x';
             simplex.speed = parseFloat(this.value);
@@ -4927,6 +5330,10 @@ for each bit in binary(b):
         document.getElementById('part3InputExp')?.addEventListener('input', updatePart3WorkedExample);
         document.getElementById('part3InputMod')?.addEventListener('input', updatePart3WorkedExample);
         document.getElementById('part3Variant')?.addEventListener('change', updatePart3WorkedExample);
+        document.getElementById('part3InputP')?.addEventListener('change', () => rsaLab.setStatus('Custom prime input changed. Click Generate Keys.'));
+        document.getElementById('part3InputQ')?.addEventListener('change', () => rsaLab.setStatus('Custom prime input changed. Click Generate Keys.'));
+        document.getElementById('part3InputE')?.addEventListener('change', () => rsaLab.setStatus('Public exponent changed. Click Generate Keys.'));
+        document.getElementById('part3InputMessage')?.addEventListener('change', () => rsaLab.setStatus('Message updated. Encrypt/decrypt to validate pipeline.'));
 
         setStatusState('part1', 'Ready');
         setStatusState('part2', 'Ready');
@@ -4934,6 +5341,7 @@ for each bit in binary(b):
         updatePart1WorkedExample();
         updatePart2WorkedExample();
         updatePart3WorkedExample();
+        rsaLab.generateKeys();
     </script>
 </body>
 </html>
