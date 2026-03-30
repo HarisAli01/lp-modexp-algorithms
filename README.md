@@ -117,11 +117,3 @@ The full application is implemented in `index.html` and runs offline with no ext
 
 - `index.html`: complete app (HTML + CSS + JavaScript)
 - `README.md`: project documentation
-
-## Suggested In-Class Demo Flow (5-7 min)
-
-1. Show homepage and explain three CLO parts.
-2. Part 1: run a normal LP, then quickly show unbounded/infeasible/degenerate presets.
-3. Part 2: demonstrate DFT matrix, FFT decomposition, and inverse reconstruction.
-4. Part 3: run both LTR and RTL variants, then demonstrate RSA key generation, encrypt, decrypt, and test suite.
-5. Conclude with complexity gains and where each algorithm is used.
