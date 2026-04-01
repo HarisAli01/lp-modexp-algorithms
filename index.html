@@ -2916,7 +2916,7 @@ for each bit in binary(b):
                 <svg id="part3Canvas" width="100%" height="400" style="background-color: #0a0e27; border: 1px solid #1a237e;"></svg>
                 <div class="key-concept">
                     <div class="key-concept-title">Key Insight</div>
-                    <div class="key-concept-text">Without this algorithm, RSA encryption would require 2^b multiplications (where b can be 2048+ bits!). Square-and-Multiply reduces this to just log b multiplications. This is why modern cryptography is practical.</div>
+                    <div class="key-concept-text">Without this algorithm, RSA encryption would require about b multiplications in the naive approach (where b can be 2048+ bits). Square-and-Multiply reduces this to O(log b) modular multiplications. This is why modern cryptography is practical.</div>
                 </div>
                 <div class="control-section" id="part3LearningObjectives">
                     <h3>Learning Objectives</h3>
@@ -4263,8 +4263,6 @@ for each bit in binary(b):
                         sumI += xr * wi + xi * wr;
                         mults += 4;
                     }
-                    sumR /= n;
-                    sumI /= n;
                     out[k].real = sumR;
                     out[k].imag = sumI;
                     out[k].magnitude = Math.sqrt(sumR * sumR + sumI * sumI);
@@ -4874,8 +4872,8 @@ for each bit in binary(b):
                 this.n = parseInt(document.getElementById('part3InputMod').value, 10) || 1000;
                 const variant = document.getElementById('part3Variant')?.value || 'ltr';
 
-                if (this.a < 1 || this.b < 1 || this.n < 1) {
-                    alert('Please enter valid positive integers');
+                if (!Number.isInteger(this.a) || !Number.isInteger(this.b) || !Number.isInteger(this.n) || this.a < 0 || this.b < 0 || this.n < 2) {
+                    alert('Please enter valid integers with a >= 0, b >= 0, and n >= 2.');
                     return;
                 }
 
@@ -5080,8 +5078,8 @@ for each bit in binary(b):
             const b = parseInt(document.getElementById('part3InputExp').value, 10);
             const n = parseInt(document.getElementById('part3InputMod').value, 10);
 
-            if (!Number.isInteger(a) || !Number.isInteger(b) || !Number.isInteger(n) || a < 1 || b < 1 || n < 1) {
-                alert('Please enter valid positive integers for a, b, and n.');
+            if (!Number.isInteger(a) || !Number.isInteger(b) || !Number.isInteger(n) || a < 0 || b < 0 || n < 2) {
+                alert('Please enter valid integers with a >= 0, b >= 0, and n >= 2.');
                 return;
             }
 
