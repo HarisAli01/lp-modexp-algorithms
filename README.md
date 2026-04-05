@@ -8,11 +8,12 @@ The full application is implemented in `index.html` and runs offline with no ext
 
 1. Part 1 (CLO-1): Linear Programming - Simplex Method
 2. Part 2 (CLO-2): FFT / DFT Visualization
-3. Part 3 (CLO-3): Modular Exponentiation + RSA Cryptosystem Lab
+3. Part 3 (CLO-3): Modular Exponentiation
+4. Part 4 (CLO-3): Cryptosystem Using Number Theory (RSA Lab)
 
 ## Current UI Structure
 
-- Homepage landing screen with cards for Part 1, Part 2, and Part 3
+- Homepage landing screen with cards for Part 1, Part 2, Part 3, and Part 4
 - Top tab selector for switching parts
 - Home button to return to the landing screen
 - Two-column layout on desktop (controls + visualization)
@@ -22,19 +23,22 @@ The full application is implemented in `index.html` and runs offline with no ext
 ## Shared Features in All Parts
 
 - Control panel and visualization panel
+- Color legend near visualization
+- Learning Objectives block in each part (placed below Key Insight)
+- Lecture Notes / roadmap section in each part
+
+## Shared Features in Algorithm Playback Parts (Part 1, Part 2, Part 3)
+
 - Playback controls in order: Build Steps, Step, Play, Pause, Reset
 - Speed slider (0.25x to 4x)
 - Step counter and status display (Idle, Ready, Playing, Paused, Done)
 - Pseudocode with line highlighting and hover tooltips
 - Plain-language step explanation box
 - Scrollable history table with clickable rows (jump to step)
-- Color legend near visualization
-- Learning Objectives block in each part (placed below Key Insight)
 - Collapsible educational sections:
   - Algorithm overview
   - Key concepts
   - Worked example
-  - Lecture notes / roadmap
 
 ## Part 1 - Simplex Method
 
@@ -70,7 +74,7 @@ The full application is implemented in `index.html` and runs offline with no ext
 - Practical vs theoretical speedup discussion
 - Dedicated "Complexity & Application Depth (CLO-2)" learning section
 
-## Part 3 - Modular Exponentiation + RSA Lab
+## Part 3 - Modular Exponentiation
 
 - Custom inputs: base, exponent, modulus
 - Both variants:
@@ -82,7 +86,9 @@ The full application is implemented in `index.html` and runs offline with no ext
 - Statistics:
   - Modular multiplication count
   - Bit length
-- Preset examples including RSA-style example
+
+## Part 4 - Cryptosystem Using Number Theory (RSA Lab)
+
 - RSA cryptosystem lab:
   - Key generation from p, q, e (plus auto-key generation by bit size)
   - Encryption c = m^e mod n
@@ -91,6 +97,11 @@ The full application is implemented in `index.html` and runs offline with no ext
   - Correctness test suite across multiple messages
   - Number-theoretic checks: gcd(e, phi)=1 and e*d mod phi = 1
   - Security/efficiency notes and attack assumptions
+- RSA visualization graph (SVG): ciphertext mapping for sampled messages
+  - Plots c = m^e mod n points
+  - Highlights current message/cipher pair
+  - Marks recovered message after decryption
+  - Includes legend and live graph insight panel
 - Dedicated "Cryptosystem Development & Testing (CLO-3)" learning section
 
 ## Tech Constraints

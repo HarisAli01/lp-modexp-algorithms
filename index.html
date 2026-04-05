@@ -4,10 +4,11 @@
     Advanced Algorithms Visualization Tool
     Purpose: Interactive teaching tool for BSD 404 - Algorithms II
     
-    Three Parts:
+    Four Parts:
     1. Part 1 (CLO-1): Linear Programming - Simplex Method
     2. Part 2 (CLO-2): Fast Fourier Transform (FFT)
     3. Part 3 (CLO-3): Modular Exponentiation (Square-and-Multiply)
+    4. Part 4 (CLO-3): Cryptosystem Using Number Theory (RSA Lab)
     
     Technology: HTML5 + CSS3 + Vanilla JavaScript (ES6+) + SVG
     No external dependencies - works completely offline
@@ -465,6 +466,11 @@
         #part3Canvas {
             height: 400px;
             min-height: 320px;
+        }
+
+        #part4Canvas {
+            height: 340px;
+            min-height: 260px;
         }
 
         svg * {
@@ -1445,7 +1451,8 @@
             }
 
             #part1Canvas,
-            #part3Canvas {
+            #part3Canvas,
+            #part4Canvas {
                 height: 320px;
                 min-height: 260px;
             }
@@ -1589,7 +1596,8 @@
         svg,
         #part1Canvas,
         #part2Canvas,
-        #part3Canvas {
+        #part3Canvas,
+        #part4Canvas {
             background: #0f1728;
             border: 1px solid #314462;
             box-shadow: none;
@@ -1623,7 +1631,8 @@
         /* Subtle per-part accents */
         #part1,
         #part2,
-        #part3 {
+        #part3,
+        #part4 {
             --part-accent: #7ea2d6;
         }
 
@@ -1639,27 +1648,36 @@
             --part-accent: #b099d6;
         }
 
+        #part4 {
+            --part-accent: #d3a06f;
+        }
+
         #part1 .vis-title,
         #part2 .vis-title,
-        #part3 .vis-title {
+        #part3 .vis-title,
+        #part4 .vis-title {
             color: var(--part-accent);
         }
 
         #part1 .legend,
         #part2 .legend,
         #part3 .legend,
+        #part4 .legend,
         #part1 .control-section,
         #part2 .control-section,
         #part3 .control-section,
+        #part4 .control-section,
         #part1 .lecture-roadmap,
         #part2 .lecture-roadmap,
-        #part3 .lecture-roadmap {
+        #part3 .lecture-roadmap,
+        #part4 .lecture-roadmap {
             border-color: color-mix(in srgb, var(--part-accent) 45%, #314462 55%);
         }
 
         #part1 .lecture-topic-badge,
         #part2 .lecture-topic-badge,
-        #part3 .lecture-topic-badge {
+        #part3 .lecture-topic-badge,
+        #part4 .lecture-topic-badge {
             background: color-mix(in srgb, var(--part-accent) 85%, #dce7f8 15%);
             box-shadow: none;
             color: #122035;
@@ -1668,16 +1686,19 @@
         #part1 .lecture-roadmap-item.active,
         #part2 .lecture-roadmap-item.active,
         #part3 .lecture-roadmap-item.active,
+        #part4 .lecture-roadmap-item.active,
         #part1 .lecture-roadmap-item:hover,
         #part2 .lecture-roadmap-item:hover,
-        #part3 .lecture-roadmap-item:hover {
+        #part3 .lecture-roadmap-item:hover,
+        #part4 .lecture-roadmap-item:hover {
             background: color-mix(in srgb, var(--part-accent) 35%, #1f2e45 65%);
             border-color: color-mix(in srgb, var(--part-accent) 55%, #5a789f 45%);
         }
 
         #part1 .vis-expand-toggle,
         #part2 .vis-expand-toggle,
-        #part3 .vis-expand-toggle {
+        #part3 .vis-expand-toggle,
+        #part4 .vis-expand-toggle {
             border-color: color-mix(in srgb, var(--part-accent) 50%, #3a5072 50%);
         }
 
@@ -1696,6 +1717,11 @@
             border-color: color-mix(in srgb, #b099d6 65%, #4f688f 35%);
         }
 
+        body[data-active-part="part4"] .tab-btn.active {
+            background: color-mix(in srgb, #d3a06f 45%, #2c4061 55%);
+            border-color: color-mix(in srgb, #d3a06f 65%, #4f688f 35%);
+        }
+
         #part1.active .btn.primary,
         #part1.active .btn.active {
             background: color-mix(in srgb, #6fa8dc 40%, #2c4061 60%);
@@ -1712,6 +1738,12 @@
         #part3.active .btn.active {
             background: color-mix(in srgb, #b099d6 40%, #2c4061 60%);
             border-color: color-mix(in srgb, #b099d6 65%, #4f688f 35%);
+        }
+
+        #part4.active .btn.primary,
+        #part4.active .btn.active {
+            background: color-mix(in srgb, #d3a06f 40%, #2c4061 60%);
+            border-color: color-mix(in srgb, #d3a06f 65%, #4f688f 35%);
         }
 
         .homepage {
@@ -2035,9 +2067,9 @@
             <h2 class="home-title">Advanced Algorithms Visualization Tool</h2>
             <div class="home-instructor">Instructor Name: Dr. Arash Kermani Kolankeh</div>
             <p class="home-subtitle">
-                This interactive tool visualizes three core algorithms through step-by-step animation,
+                This interactive tool visualizes four core algorithm modules through step-by-step animation,
                 controls, and explanations: the Simplex Method for linear programming,
-                Fast Fourier Transform (FFT), and Modular Exponentiation using Square-and-Multiply.
+                Fast Fourier Transform (FFT), Modular Exponentiation, and Cryptosystem Using Number Theory.
             </p>
 
             <div class="home-grid">
@@ -2073,6 +2105,17 @@
                     </p>
                     <button class="home-launch" onclick="openHomepagePart('part3')">Open Part 3</button>
                 </article>
+
+                <article class="home-card">
+                    <div class="home-card-label">Part 4</div>
+                    <h3>Cryptosystem Using Number Theory</h3>
+                    <p>
+                        Build and test an RSA pipeline with number-theoretic foundations.
+                        Generate key pairs from primes, run encryption and decryption,
+                        and verify correctness and security assumptions in a guided lab format.
+                    </p>
+                    <button class="home-launch" onclick="openHomepagePart('part4')">Open Part 4</button>
+                </article>
             </div>
 
             <div class="home-note">Tip: You can return to this homepage any time using the Home button in the top bar.</div>
@@ -2082,7 +2125,7 @@
     <div class="header">
         <div class="header-meta">
             <h1>🧮 Advanced Algorithms Visualization Tool</h1>
-            <div class="header-subtitle">Interactive visual tool for Simplex, FFT, and Modular Exponentiation</div>
+            <div class="header-subtitle">Interactive visual tool for Simplex, FFT, Modular Exponentiation, and Cryptosystem</div>
             <div class="header-instructor">Instructor: Dr. Arash Kermani</div>
         </div>
         <div class="header-actions">
@@ -2090,6 +2133,7 @@
                 <button class="tab-btn active" id="tabPart1" onclick="switchPart('part1', this)">Part 1: Simplex</button>
                 <button class="tab-btn" id="tabPart2" onclick="switchPart('part2', this)">Part 2: FFT</button>
                 <button class="tab-btn" id="tabPart3" onclick="switchPart('part3', this)">Part 3: Modular Exp</button>
+                <button class="tab-btn" id="tabPart4" onclick="switchPart('part4', this)">Part 4: Cryptosystem</button>
             </div>
             <button class="home-btn" onclick="showHomepage()">Home</button>
         </div>
@@ -2633,7 +2677,6 @@ until no entering variable exists (optimal)</div>
                         <button class="btn" onclick="modExpSetExample(2, 13, 1000)">Example: 2^13 mod 1000</button>
                         <button class="btn" onclick="modExpSetExample(7, 100, 13)">Example: 7^100 mod 13</button>
                         <button class="btn" onclick="modExpSetExample(3, 47, 100)">Example: 3^47 mod 100</button>
-                        <button class="btn" onclick="modExpSetExample(65, 17, 3233)">RSA Example: 65^17 mod 3233</button>
                     </div>
                 </div>
 
@@ -2692,61 +2735,6 @@ until no entering variable exists (optimal)</div>
                     </div>
                 </div>
 
-                <div class="control-section">
-                    <h3>🔐 RSA Cryptosystem Lab (CLO-3)</h3>
-                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px;">Prime p:</label>
-                    <input class="input-field" type="number" id="part3InputP" value="61" min="3" max="997">
-
-                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Prime q:</label>
-                    <input class="input-field" type="number" id="part3InputQ" value="53" min="3" max="997">
-
-                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Public exponent e:</label>
-                    <input class="input-field" type="number" id="part3InputE" value="17" min="3" max="100000">
-
-                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Message m (0 &le; m &lt; n):</label>
-                    <input class="input-field" type="number" id="part3InputMessage" value="65" min="0" max="1000000">
-
-                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Auto key size (demo bits):</label>
-                    <select class="input-field" id="part3KeySize">
-                        <option value="8">8-bit demo</option>
-                        <option value="10">10-bit demo</option>
-                        <option value="12">12-bit demo</option>
-                    </select>
-
-                    <div class="button-group" style="margin-top: 8px;">
-                        <button class="btn" onclick="rsaLab.generateKeys()">Generate Keys</button>
-                        <button class="btn" onclick="rsaLab.generateKeysFromSize()">Auto Keys</button>
-                        <button class="btn" onclick="rsaLab.encryptMessage()">Encrypt</button>
-                        <button class="btn" onclick="rsaLab.decryptCipher()">Decrypt</button>
-                    </div>
-                    <div class="button-group full">
-                        <button class="btn success" onclick="rsaLab.runTestSuite()">Run Correctness + Security Tests</button>
-                    </div>
-
-                    <div class="explanation-box" style="margin-top: 8px;">
-                        <div class="explanation-title">RSA Status</div>
-                        <div id="part3RSAStatus">Generate keys to start the cryptosystem pipeline.</div>
-                    </div>
-                    <div class="history-table" style="margin-top: 8px; max-height: 180px;">
-                        <table>
-                            <thead>
-                                <tr><th>Item</th><th>Value</th></tr>
-                            </thead>
-                            <tbody id="part3RSAKeys">
-                                <tr><td colspan="2" style="color:#90caf9;">No key material yet</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="explanation-box" style="margin-top: 8px;">
-                        <div class="explanation-title">Ciphertext / Recovery</div>
-                        <div id="part3RSAResult">c = -, recovered m = -</div>
-                    </div>
-                    <div class="explanation-box" style="margin-top: 8px;">
-                        <div class="explanation-title">Security + Efficiency Notes</div>
-                        <div id="part3RSASecurity">After tests, this panel reports assumptions (factoring hardness), timing, and attack notes.</div>
-                    </div>
-                </div>
-
                 <button class="collapsible" onclick="toggleCollapsible(this)">📖 Algorithm Overview</button>
                 <div class="collapsible-content">
                     <strong>Modular Exponentiation (Square-and-Multiply)</strong> computes a^b mod n efficiently in O(log b) multiplications.
@@ -2767,14 +2755,6 @@ until no entering variable exists (optimal)</div>
                     <strong>Left-to-Right:</strong> Start from the highest bit.
                     <br><br>
                     <strong>Right-to-Left:</strong> Start from the lowest bit.
-                </div>
-
-                <button class="collapsible" onclick="toggleCollapsible(this)">🧩 Cryptosystem Development & Testing (CLO-3)</button>
-                <div class="collapsible-content">
-                    <strong>Pipeline:</strong> key generation (p, q, n, φ, e, d) → encryption c = m^e mod n → decryption m = c^d mod n.<br>
-                    <strong>Number Theory Used:</strong> modular arithmetic, gcd(e, φ) = 1, modular inverse d = e^(-1) mod φ, Euler theorem basis for correctness.<br>
-                    <strong>Correctness Check:</strong> verify decrypted message equals original message for multiple inputs.<br>
-                    <strong>Security Assumption:</strong> practical RSA security relies on hardness of factoring n = pq for large primes.
                 </div>
 
                 <div class="pseudocode">
@@ -2921,7 +2901,160 @@ for each bit in binary(b):
                 <div class="control-section" id="part3LearningObjectives">
                     <h3>Learning Objectives</h3>
                     <div style="font-size: 14px; line-height: 1.6; color: #dbe6f5;">
-                        After this section, you will be able to: compute modular powers efficiently with binary exponentiation; explain why the method is O(log b); build and test an RSA pipeline (key generation, encryption, decryption) with number-theoretic reasoning.
+                        After this section, you will be able to: compute modular powers efficiently with binary exponentiation; explain why the method is O(log b); and connect modular exponentiation to cryptography use cases.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PART 4: CRYPTOSYSTEM USING NUMBER THEORY ===== -->
+        <div class="part" id="part4">
+            <div class="control-panel">
+                <div class="control-section">
+                    <h3>🔐 RSA Cryptosystem Lab (CLO-3)</h3>
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px;">Prime p:</label>
+                    <input class="input-field" type="number" id="part3InputP" value="61" min="3" max="997">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Prime q:</label>
+                    <input class="input-field" type="number" id="part3InputQ" value="53" min="3" max="997">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Public exponent e:</label>
+                    <input class="input-field" type="number" id="part3InputE" value="17" min="3" max="100000">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Message m (0 &le; m &lt; n):</label>
+                    <input class="input-field" type="number" id="part3InputMessage" value="65" min="0" max="1000000">
+
+                    <label style="font-size: 12px; color: #90caf9; display: block; margin-bottom: 4px; margin-top: 8px;">Auto key size (demo bits):</label>
+                    <select class="input-field" id="part3KeySize">
+                        <option value="8">8-bit demo</option>
+                        <option value="10">10-bit demo</option>
+                        <option value="12">12-bit demo</option>
+                    </select>
+
+                    <div class="button-group" style="margin-top: 8px;">
+                        <button class="btn" onclick="rsaLab.generateKeys()">Generate Keys</button>
+                        <button class="btn" onclick="rsaLab.generateKeysFromSize()">Auto Keys</button>
+                        <button class="btn" onclick="rsaLab.encryptMessage()">Encrypt</button>
+                        <button class="btn" onclick="rsaLab.decryptCipher()">Decrypt</button>
+                    </div>
+                    <div class="button-group full">
+                        <button class="btn success" onclick="rsaLab.runTestSuite()">Run Correctness + Security Tests</button>
+                    </div>
+
+                    <div class="explanation-box" style="margin-top: 8px;">
+                        <div class="explanation-title">RSA Status</div>
+                        <div id="part3RSAStatus">Generate keys to start the cryptosystem pipeline.</div>
+                    </div>
+                    <div class="history-table" style="margin-top: 8px; max-height: 180px;">
+                        <table>
+                            <thead>
+                                <tr><th>Item</th><th>Value</th></tr>
+                            </thead>
+                            <tbody id="part3RSAKeys">
+                                <tr><td colspan="2" style="color:#90caf9;">No key material yet</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="explanation-box" style="margin-top: 8px;">
+                        <div class="explanation-title">Ciphertext / Recovery</div>
+                        <div id="part3RSAResult">c = -, recovered m = -</div>
+                    </div>
+                    <div class="explanation-box" style="margin-top: 8px;">
+                        <div class="explanation-title">Security + Efficiency Notes</div>
+                        <div id="part3RSASecurity">After tests, this panel reports assumptions (factoring hardness), timing, and attack notes.</div>
+                    </div>
+                </div>
+
+                <button class="collapsible" onclick="toggleCollapsible(this)">🧩 Cryptosystem Development & Testing (CLO-3)</button>
+                <div class="collapsible-content">
+                    <strong>Pipeline:</strong> key generation (p, q, n, φ, e, d) → encryption c = m^e mod n → decryption m = c^d mod n.<br>
+                    <strong>Number Theory Used:</strong> modular arithmetic, gcd(e, φ) = 1, modular inverse d = e^(-1) mod φ, Euler theorem basis for correctness.<br>
+                    <strong>Correctness Check:</strong> verify decrypted message equals original message for multiple inputs.<br>
+                    <strong>Security Assumption:</strong> practical RSA security relies on hardness of factoring n = pq for large primes.
+                </div>
+
+            </div>
+
+            <div class="visualization-area">
+                <div class="vis-header">
+                    <div class="vis-title">Cryptosystem Using Number Theory: RSA Lab</div>
+                    <button class="collapsible lecture-collapsible vis-expand-toggle" onclick="toggleCollapsible(this)">Lecture Notes — Start Here</button>
+                </div>
+                <div class="collapsible-content lecture-content">
+                    <div class="lecture-panel-title">Lecture Notes - Cryptosystem Using Number Theory</div>
+                    <div class="lecture-roadmap">
+                        <div class="lecture-roadmap-title">Learning Roadmap</div>
+                        <div class="lecture-roadmap-grid">
+                            <button type="button" class="lecture-roadmap-item" onclick="scrollToLectureTopic('part4-topic1', this)">1. RSA Pipeline Overview</button>
+                            <button type="button" class="lecture-roadmap-item" onclick="scrollToLectureTopic('part4-topic2', this)">2. Key Generation</button>
+                            <button type="button" class="lecture-roadmap-item" onclick="scrollToLectureTopic('part4-topic3', this)">3. Encrypt and Decrypt</button>
+                            <button type="button" class="lecture-roadmap-item" onclick="scrollToLectureTopic('part4-topic4', this)">4. Correctness and Security</button>
+                        </div>
+                    </div>
+
+                    <div class="lecture-topic" id="part4-topic1">
+                        <div class="lecture-topic-title"><span class="lecture-topic-badge">1</span>RSA Pipeline Overview</div>
+                        <p>RSA is a full cryptosystem, not only a formula. In practice, we run key generation first, then encryption, then decryption, and finally validation tests.</p>
+                        <div class="lecture-card">
+                            <strong>Pipeline:</strong> choose primes p and q, compute n and phi(n), choose e, compute d, then evaluate c = m^e mod n and m = c^d mod n.
+                        </div>
+                    </div>
+
+                    <div class="lecture-topic" id="part4-topic2">
+                        <div class="lecture-topic-title"><span class="lecture-topic-badge">2</span>Key Generation</div>
+                        <p>Valid key generation requires number-theory constraints: p and q must be prime, e must satisfy gcd(e, phi)=1, and d is the modular inverse of e modulo phi.</p>
+                        <div class="lecture-note">Without a valid inverse d, decryption cannot recover messages correctly.</div>
+                    </div>
+
+                    <div class="lecture-topic" id="part4-topic3">
+                        <div class="lecture-topic-title"><span class="lecture-topic-badge">3</span>Encrypt and Decrypt</div>
+                        <p>Encryption transforms message m to ciphertext c with the public key. Decryption applies the private exponent d to recover the original message.</p>
+                        <div class="lecture-code">c = m^e mod n
+m = c^d mod n</div>
+                    </div>
+
+                    <div class="lecture-topic" id="part4-topic4">
+                        <div class="lecture-topic-title"><span class="lecture-topic-badge">4</span>Correctness and Security</div>
+                        <p>Correctness is checked by round-trip tests (decrypt(encrypt(m)) = m). Security comes from factoring hardness for large n, not from keeping the algorithm secret.</p>
+                        <div class="lecture-note">Demo key sizes are intentionally small for teaching and are not secure for real-world use.</div>
+                    </div>
+                </div>
+                <div class="legend">
+                    <div class="legend-title">Graph Legend</div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #5da9e9;"></div>
+                        <span>Sample ciphertext points: c = m^e mod n</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #f6bd60;"></div>
+                        <span>Current message/cipher pair</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #84dcc6;"></div>
+                        <span>Recovered message after decryption</span>
+                    </div>
+                </div>
+                <svg id="part4Canvas" width="100%" height="340" style="background-color: #0a0e27; border: 1px solid #1a237e;"></svg>
+                <div class="control-section" style="margin-top: 12px;">
+                    <h3>Graph Insight</h3>
+                    <div id="part4GraphInfo" style="font-size: 13px; line-height: 1.5; color: #b0bec5;">Generate keys to plot ciphertext mapping.</div>
+                </div>
+                <div class="explanation-box">
+                    <div class="explanation-title">How to Use This Part</div>
+                    <div>
+                        Start by choosing primes p and q with a valid public exponent e, then generate keys.<br>
+                        Encrypt a message m, decrypt the ciphertext, and confirm round-trip correctness.<br>
+                        Run the test suite to see correctness checks and practical security notes.
+                    </div>
+                </div>
+                <div class="key-concept">
+                    <div class="key-concept-title">Key Insight</div>
+                    <div class="key-concept-text">RSA combines arithmetic structure and computational hardness: correctness comes from modular number theory, while security depends on the practical difficulty of factoring n = pq.</div>
+                </div>
+                <div class="control-section" id="part4LearningObjectives" style="margin-top: 12px;">
+                    <h3>Learning Objectives</h3>
+                    <div style="font-size: 14px; line-height: 1.6; color: #dbe6f5;">
+                        After this section, you will be able to: generate RSA keys from number-theoretic constraints; run encryption/decryption correctly; and evaluate assumptions behind RSA security in a teaching-lab setting.
                     </div>
                 </div>
             </div>
@@ -3002,7 +3135,8 @@ for each bit in binary(b):
             const map = {
                 part1: document.getElementById('tabPart1'),
                 part2: document.getElementById('tabPart2'),
-                part3: document.getElementById('tabPart3')
+                part3: document.getElementById('tabPart3'),
+                part4: document.getElementById('tabPart4')
             };
             switchPart(partId, map[partId] || null);
             document.body.classList.remove('home-visible');
@@ -3024,6 +3158,9 @@ for each bit in binary(b):
             }
             if (typeof modExp !== 'undefined' && modExp && typeof modExp.reset === 'function') {
                 modExp.reset();
+            }
+            if (typeof rsaLab !== 'undefined' && rsaLab && typeof rsaLab.reset === 'function') {
+                rsaLab.reset();
             }
         }
 
@@ -5112,11 +5249,40 @@ for each bit in binary(b):
                 if (el) el.innerHTML = text;
             },
 
+            reset() {
+                this.p = null;
+                this.q = null;
+                this.n = null;
+                this.phi = null;
+                this.e = null;
+                this.d = null;
+                this.lastMessage = null;
+                this.lastCipher = null;
+                this.lastRecovered = null;
+
+                const pEl = document.getElementById('part3InputP');
+                const qEl = document.getElementById('part3InputQ');
+                const eEl = document.getElementById('part3InputE');
+                const mEl = document.getElementById('part3InputMessage');
+                const sizeEl = document.getElementById('part3KeySize');
+                if (pEl) pEl.value = '61';
+                if (qEl) qEl.value = '53';
+                if (eEl) eEl.value = '17';
+                if (mEl) mEl.value = '65';
+                if (sizeEl) sizeEl.value = '8';
+
+                this.setStatus('Generate keys to start the cryptosystem pipeline.');
+                this.setResult('c = -, recovered m = -');
+                this.setSecurity('After tests, this panel reports assumptions (factoring hardness), timing, and attack notes.');
+                this.renderKeyTable();
+            },
+
             renderKeyTable() {
                 const tbody = document.getElementById('part3RSAKeys');
                 if (!tbody) return;
                 if (!Number.isInteger(this.n) || !Number.isInteger(this.d)) {
                     tbody.innerHTML = '<tr><td colspan="2" style="color:#90caf9;">No key material yet</td></tr>';
+                    this.drawMappingGraph();
                     return;
                 }
                 tbody.innerHTML = `
@@ -5129,6 +5295,121 @@ for each bit in binary(b):
                     <tr><td>Public Key</td><td>(${this.e}, ${this.n})</td></tr>
                     <tr><td>Private Key</td><td>(${this.d}, ${this.n})</td></tr>
                 `;
+                this.drawMappingGraph();
+            },
+
+            drawMappingGraph() {
+                const canvas = document.getElementById('part4Canvas');
+                const info = document.getElementById('part4GraphInfo');
+                if (!canvas) return;
+
+                canvas.innerHTML = '';
+
+                if (!Number.isInteger(this.n) || !Number.isInteger(this.e) || this.n <= 1) {
+                    if (info) info.textContent = 'Generate keys to plot ciphertext mapping.';
+                    return;
+                }
+
+                const width = canvas.clientWidth || 860;
+                const height = canvas.clientHeight || 340;
+                const margin = {left: 52, right: 24, top: 22, bottom: 44};
+                const plotW = Math.max(80, width - margin.left - margin.right);
+                const plotH = Math.max(80, height - margin.top - margin.bottom);
+
+                const rawMessage = parseInt(document.getElementById('part3InputMessage')?.value || '', 10);
+                const currentM = Number.isInteger(rawMessage) && rawMessage >= 0 && rawMessage < this.n ? rawMessage : null;
+                const maxSamples = Math.min(24, this.n);
+                const samples = [];
+                for (let m = 0; m < maxSamples; m++) {
+                    samples.push({m, c: modPow(m, this.e, this.n)});
+                }
+                if (currentM !== null && currentM >= maxSamples) {
+                    samples.push({m: currentM, c: modPow(currentM, this.e, this.n)});
+                }
+
+                const xMax = Math.max(1, ...samples.map((s) => s.m));
+                const yMax = Math.max(1, this.n - 1);
+                const xToPx = (x) => margin.left + (x / xMax) * plotW;
+                const yToPx = (y) => margin.top + plotH - (y / yMax) * plotH;
+
+                const drawLine = (x1, y1, x2, y2, stroke, w = 1, dash = '') => {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', x1);
+                    line.setAttribute('y1', y1);
+                    line.setAttribute('x2', x2);
+                    line.setAttribute('y2', y2);
+                    line.setAttribute('stroke', stroke);
+                    line.setAttribute('stroke-width', String(w));
+                    if (dash) line.setAttribute('stroke-dasharray', dash);
+                    canvas.appendChild(line);
+                };
+
+                const drawText = (x, y, text, color = '#9eb2cf', size = '10', anchor = 'middle') => {
+                    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    t.setAttribute('x', x);
+                    t.setAttribute('y', y);
+                    t.setAttribute('fill', color);
+                    t.setAttribute('font-size', size);
+                    t.setAttribute('font-family', 'Segoe UI, sans-serif');
+                    t.setAttribute('text-anchor', anchor);
+                    t.textContent = text;
+                    canvas.appendChild(t);
+                };
+
+                for (let i = 0; i <= 5; i++) {
+                    const gx = margin.left + (i / 5) * plotW;
+                    drawLine(gx, margin.top, gx, margin.top + plotH, '#233550', 1);
+                    const msgTick = Math.round((i / 5) * xMax);
+                    drawText(gx, margin.top + plotH + 16, String(msgTick));
+
+                    const gy = margin.top + (i / 5) * plotH;
+                    drawLine(margin.left, gy, margin.left + plotW, gy, '#233550', 1);
+                    const cTick = Math.round(((5 - i) / 5) * yMax);
+                    drawText(margin.left - 8, gy + 3, String(cTick), '#9eb2cf', '10', 'end');
+                }
+
+                drawLine(margin.left, margin.top + plotH, margin.left + plotW, margin.top + plotH, '#7e99bc', 1.5);
+                drawLine(margin.left, margin.top, margin.left, margin.top + plotH, '#7e99bc', 1.5);
+                drawText(margin.left + plotW / 2, height - 8, 'message m', '#c7d4e8', '11');
+                drawText(12, margin.top + plotH / 2, 'ciphertext c', '#c7d4e8', '11', 'start');
+
+                samples.forEach((s) => {
+                    const cx = xToPx(s.m);
+                    const cy = yToPx(s.c);
+                    const isCurrent = currentM !== null && s.m === currentM;
+                    const point = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    point.setAttribute('cx', cx);
+                    point.setAttribute('cy', cy);
+                    point.setAttribute('r', isCurrent ? '5.5' : '3.5');
+                    point.setAttribute('fill', isCurrent ? '#f6bd60' : '#5da9e9');
+                    point.setAttribute('opacity', isCurrent ? '1' : '0.9');
+                    canvas.appendChild(point);
+                });
+
+                if (Number.isInteger(this.lastRecovered) && currentM !== null) {
+                    const rx = xToPx(currentM);
+                    const ry = yToPx(this.lastRecovered);
+                    const recovered = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    recovered.setAttribute('x', String(rx - 4));
+                    recovered.setAttribute('y', String(ry - 4));
+                    recovered.setAttribute('width', '8');
+                    recovered.setAttribute('height', '8');
+                    recovered.setAttribute('fill', '#84dcc6');
+                    canvas.appendChild(recovered);
+                }
+
+                const currentCipher = currentM !== null ? modPow(currentM, this.e, this.n) : null;
+                const recoveryText = Number.isInteger(this.lastRecovered)
+                    ? `recovered m = ${this.lastRecovered}`
+                    : 'decrypt to show recovered message marker';
+
+                if (info) {
+                    info.innerHTML =
+                        `Plotting c = m^e mod n for ${samples.length} sample messages (n=${this.n}, e=${this.e}). ` +
+                        (currentM !== null
+                            ? `Current m=${currentM}, c=${currentCipher}; ${recoveryText}.`
+                            : 'Enter a valid message in range 0 <= m < n to highlight a point.');
+                }
             },
 
             readInputs() {
@@ -5183,6 +5464,7 @@ for each bit in binary(b):
                     `<strong>Correctness Basis:</strong> Euler theorem / RSA congruence ensures m^(ed) ≡ m (mod n) for valid messages.<br>` +
                     `<strong>Security Basis:</strong> Public key is safe only when factoring n is computationally hard at real key sizes.`
                 );
+                this.drawMappingGraph();
             },
 
             generateKeysFromSize() {
@@ -5243,6 +5525,7 @@ for each bit in binary(b):
                     `<strong>Observed Time:</strong> ${Math.max(0, t1 - t0).toFixed(4)} ms (demo runtime).<br>` +
                     `<strong>Interpretation:</strong> modular exponentiation scales with O(log e) multiplications.`
                 );
+                this.drawMappingGraph();
             },
 
             decryptCipher() {
@@ -5267,6 +5550,7 @@ for each bit in binary(b):
                 const ok = Number.isInteger(this.lastMessage) ? recovered === this.lastMessage : true;
                 this.setResult(`c = ${c}; recovered m = c^d mod n = ${recovered}`);
                 this.setStatus(ok ? 'Decryption complete and correctness verified (recovered m equals original m).' : 'Decryption complete but recovered value does not match original message.');
+                this.drawMappingGraph();
             },
 
             runTestSuite() {
@@ -5302,6 +5586,7 @@ for each bit in binary(b):
                     `<strong>Security Assumptions:</strong> resistance is based on factoring hardness; small demo keys are breakable and are for learning only.<br>` +
                     `<strong>Attack Discussion:</strong> brute-force factoring on tiny n is feasible, so correctness here does not imply practical security.`
                 );
+                this.drawMappingGraph();
             }
         };
 
@@ -5328,10 +5613,22 @@ for each bit in binary(b):
         document.getElementById('part3InputExp')?.addEventListener('input', updatePart3WorkedExample);
         document.getElementById('part3InputMod')?.addEventListener('input', updatePart3WorkedExample);
         document.getElementById('part3Variant')?.addEventListener('change', updatePart3WorkedExample);
-        document.getElementById('part3InputP')?.addEventListener('change', () => rsaLab.setStatus('Custom prime input changed. Click Generate Keys.'));
-        document.getElementById('part3InputQ')?.addEventListener('change', () => rsaLab.setStatus('Custom prime input changed. Click Generate Keys.'));
-        document.getElementById('part3InputE')?.addEventListener('change', () => rsaLab.setStatus('Public exponent changed. Click Generate Keys.'));
-        document.getElementById('part3InputMessage')?.addEventListener('change', () => rsaLab.setStatus('Message updated. Encrypt/decrypt to validate pipeline.'));
+        document.getElementById('part3InputP')?.addEventListener('change', () => {
+            rsaLab.setStatus('Custom prime input changed. Click Generate Keys.');
+            rsaLab.drawMappingGraph();
+        });
+        document.getElementById('part3InputQ')?.addEventListener('change', () => {
+            rsaLab.setStatus('Custom prime input changed. Click Generate Keys.');
+            rsaLab.drawMappingGraph();
+        });
+        document.getElementById('part3InputE')?.addEventListener('change', () => {
+            rsaLab.setStatus('Public exponent changed. Click Generate Keys.');
+            rsaLab.drawMappingGraph();
+        });
+        document.getElementById('part3InputMessage')?.addEventListener('change', () => {
+            rsaLab.setStatus('Message updated. Encrypt/decrypt to validate pipeline.');
+            rsaLab.drawMappingGraph();
+        });
 
         setStatusState('part1', 'Ready');
         setStatusState('part2', 'Ready');
@@ -5339,7 +5636,7 @@ for each bit in binary(b):
         updatePart1WorkedExample();
         updatePart2WorkedExample();
         updatePart3WorkedExample();
-        rsaLab.generateKeys();
+        rsaLab.reset();
     </script>
 </body>
 </html>
